@@ -2,9 +2,10 @@
 
   /* 메뉴 스타일 */
   nav {
-    background-color: black;
+    background-color: #000b00;
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 30px;
+    box-shadow: 0 8px 6px rgb(1, 91, 4);
   }
 
   ul {
@@ -22,15 +23,17 @@
   li a {
     color: white;
     text-decoration: none;
+    font-size: 22px;
   }
 
   /* 로고 스타일 */
   header {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: flex-start;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
   }
 
   header img {
@@ -44,10 +47,10 @@
     background-color: black;
     background-image: linear-gradient(to right, #65f765, #001f04);
     background-size: 200% 100%;
-    animation: gradientAnimation 20s infinite;
+    /* animation: gradientAnimation 20s infinite; */
   }
 
-  @keyframes gradientAnimation {
+  /* @keyframes gradientAnimation {
     0% {
       background-position: 0% 50%;
     }
@@ -57,7 +60,7 @@
     100% {
       background-position: 0% 50%;
     }
-  }
+  } */
 .menu-link:hover {
   color: green;
 }

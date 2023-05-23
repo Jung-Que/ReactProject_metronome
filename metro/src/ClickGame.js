@@ -17,9 +17,9 @@ const ClickGame = () => {
 
   const createShape = () => {
     const backgroundWidth = window.innerWidth;
-    const backgroundHeight = 500; // Adjust the height of the gray background if needed
+    const backgroundHeight = 500; // 100~700
     const randomX = Math.floor(Math.random() * backgroundWidth);
-    const randomY = Math.floor(Math.random() * backgroundHeight);
+    const randomY = Math.floor(100 + Math.random() * backgroundHeight);
     const randomSize = Math.floor(Math.random() * 50) + 20;
     const randomRotation = Math.floor(Math.random() * 360);
     const shape = {
@@ -82,7 +82,8 @@ const ClickGame = () => {
   };
 
   return (
-    <div style={{ height: '500px', background: 'lightgray' }} onClick={handleClick}>
+    <div style={{ height: '700px', background: "#001f04" }} onClick={handleClick}>
+      <button onClick={handleStartClick}>Start</button>
       <div style={{ position: 'relative', height: '100%', width: '100%' }}>
         {shapes.map((shape, index) => {
           const { x, y, size, rotation, color, shape: shapeType, visible } = shape;
@@ -121,7 +122,7 @@ const ClickGame = () => {
           return null;
         })}
       </div>
-      <button onClick={handleStartClick}>Start</button>
+
     </div>
   );
 };

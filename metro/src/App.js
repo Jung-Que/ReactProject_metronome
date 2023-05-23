@@ -50,16 +50,25 @@ const App = () => {
   return (
     <Router>
       <div>
-        <header>
-          <img src="로고이미지주소" alt="로고" className="logo" />
+      <header>
+        <img src="./logo.png" alt="로고" className="logo"
+         style={{ width: 'auto', height: '100px' }} />
         </header>
         <Menu />
         <Routes>
-          <Route exact path="/" component={Home} />
-          <Route path="/test" component={Test} />
-          <Route path="/game" element={<Game />} /> {/* 수정된 부분 */}
-          <Route path="/about" component={About} />
-        </Routes>
+  <div style={{ display: 'flex', alignItems: 'center' }}>
+    <img
+      src="./logo.png"
+      alt="로고"
+      className="logo"
+      style={{ width: 'auto', height: '100px', marginRight: '10px' }}
+    />
+    <Route exact path="/" component={Home} />
+    <Route path="/test" component={Test} />
+    <Route path="/game" element={<Game />} /> {/* 수정된 부분 */}
+    <Route path="/about" component={About} />
+  </div>
+</Routes>
       </div>
     </Router>
   );
