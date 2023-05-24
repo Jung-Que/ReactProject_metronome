@@ -5,16 +5,19 @@ const ClickGame = () => {
   const [shapes, setShapes] = useState([]);
   const [clickTimes, setClickTimes] = useState([]);
   const [isGameStarted, setIsGameStarted] = useState(false);
+  const [isButtonVisible, setIsButtonVisible] = useState(true);
 
   const handleClick = (event) => {
     if (!isGameStarted) return;
-    //button on off 추가
+
     const { clientX, clientY } = event;
     setClickPosition({ x: clientX, y: clientY });
     createShape();
     updateClickTimes();
   };
 
+  
+  
   const createShape = () => {
     const backgroundWidth = window.innerWidth;
     const backgroundHeight = 500; // 100~700
@@ -60,33 +63,30 @@ const ClickGame = () => {
     if (clickTimes.length >= 10) {
       console.log(clickTimes);
       setClickTimes([]);
+      setShapes([]);
       setIsGameStarted(false);
+      setIsButtonVisible(true);
     }
   }, [clickTimes]);
-
-  useEffect(() => {
-    const shapeRemoval = setInterval(() => {
-      const currentTime = Date.now();
-      const filteredShapes = shapes.filter((shape) => currentTime - shape.timestamp <= 2000);
-      setShapes(filteredShapes);
-    }, 100);
-
-    return () => {
-      clearInterval(shapeRemoval);
-    };
-  }, [shapes]);
 
   const handleStartClick = () => {
     setClickTimes([]);
     setIsGameStarted(true);
+    setIsButtonVisible(false);
   };
 
   return (
-    <div style={{ height: '700px', background: "#001f04" }} onClick={handleClick}>
-      <button onClick={handleStartClick} style={{ height: '100px', width: "100px"}}>Start</button>
+    <div style={{ height: '800px', background: '#001f04', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} onClick={handleClick}>
+      {isButtonVisible && (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <button onClick={handleStartClick} style={{ marginTop: '350px', height: '100px', width: '100px', color: 'white' }}>
+            Start
+          </button>
+          <p style={{ color: 'white', marginTop: '10px' }}>마우스 클릭</p>
+        </div>
+      )}
       <div style={{ position: 'relative', height: '100%', width: '100%' }}>
-        <p>마우스 클릭</p>
-        {shapes.map((shape, index) => {
+      {shapes.map((shape, index) => {
           const { x, y, size, rotation, color, shape: shapeType, visible } = shape;
           const shapeStyle = {
             position: 'absolute',
@@ -99,7 +99,7 @@ const ClickGame = () => {
             transform: `rotate(${rotation}deg)`,
             transition: 'opacity 0.3s ease-out',
           };
-
+  
           if (shapeType === 'square') {
             return <div key={index} style={shapeStyle} />;
           } else if (shapeType === 'circle') {
@@ -119,11 +119,10 @@ const ClickGame = () => {
               />
             );
           }
-
+  
           return null;
         })}
       </div>
-
     </div>
   );
 };
