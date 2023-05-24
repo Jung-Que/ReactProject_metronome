@@ -8,7 +8,7 @@ const ClickGame = () => {
 
   const handleClick = (event) => {
     if (!isGameStarted) return;
-
+    //button on off 추가
     const { clientX, clientY } = event;
     setClickPosition({ x: clientX, y: clientY });
     createShape();
@@ -83,8 +83,9 @@ const ClickGame = () => {
 
   return (
     <div style={{ height: '700px', background: "#001f04" }} onClick={handleClick}>
-      <button onClick={handleStartClick}>Start</button>
+      <button onClick={handleStartClick} style={{ height: '100px', width: "100px"}}>Start</button>
       <div style={{ position: 'relative', height: '100%', width: '100%' }}>
+        <p>마우스 클릭</p>
         {shapes.map((shape, index) => {
           const { x, y, size, rotation, color, shape: shapeType, visible } = shape;
           const shapeStyle = {

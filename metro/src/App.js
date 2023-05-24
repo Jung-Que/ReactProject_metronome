@@ -50,7 +50,7 @@ const Menu = () => {
           </li>
         </ul>
       </div>
-      <div style={{ paddingTop: "10px" ,paddingLeft: '0px', paddingRight: "80px"}}>
+      <div style={{ paddingTop: "10px" ,paddingLeft: '0px', paddingRight: "50px"}}>
         <img src="./gits.png" alt="이미지1" className="menu-image" style={{ width: '80px', height: '80px' }} />
         <img src="./gits.png" alt="이미지2" className="menu-image" style={{ width: 'auto', height: '80px' }} />
         <img src="./gits.png" alt="이미지3" className="menu-image" style={{ width: 'auto', height: '80px' }} />
@@ -59,6 +59,20 @@ const Menu = () => {
   );
 };
 
+const Menuunder = () => {
+  return (
+    <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'left', marginBottom: '0px' }}>
+      <div>
+        <li>
+            <Link to="/">
+              <img src="./logo.png" alt="로고" className="logo" 
+              style={{ width: 'auto', height: '70px' }} />
+            </Link>
+          </li>
+      </div>
+    </nav>
+  );
+};
 
 
 // App 컴포넌트
@@ -66,9 +80,12 @@ const App = () => {
   return (
     <Router>
       <div>
-        
+        <header>
         <Menu />
-        <HorizonLine text="OR"/>
+        </header>
+        <div style={{height:"90px"}}>
+        </div>
+        <HorizonLine text=""/>
         <Routes>
           <Route exact path="/" component={Home} />
           <Route path="/test" component={Test} />
@@ -76,6 +93,9 @@ const App = () => {
           <Route path="/about" component={About} />
         </Routes>
       </div>
+      <footer>
+      <Menuunder />
+        </footer>
     </Router>
   );
 };

@@ -29,12 +29,20 @@
 
   /* 로고 스타일 */
   header {
-    display: flex;
+    /* display: flex; */
     /* justify-content: left; */
+    position: fixed;
     align-items: flex-start;
-    padding-top: 20px;
+    width: 100%;
+    top: 0;
+    /* padding-top: 20px;
     padding-bottom: 20px;
-    padding-left: 20px;
+    padding-left: 20px; */
+  }
+  footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
   }
 
   header img {

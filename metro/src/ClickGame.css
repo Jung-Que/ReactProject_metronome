@@ -20,4 +20,12 @@
   .click-game-button:hover {
     background-color: #1976d2;
   }
+  button{
+    height: '100px';
+     width: "100px";
+  }
   
+  p {
+    color: white;
+    font-size: 22px;
+  }
