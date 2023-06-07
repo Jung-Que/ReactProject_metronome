@@ -6,6 +6,7 @@ const ClickGame = () => {
   const [clickTimes, setClickTimes] = useState([]);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
+  const [clickIntervals, setClickIntervals] = useState([]);
 
   const handleClick = (event) => {
     if (!isGameStarted) return;
@@ -13,7 +14,7 @@ const ClickGame = () => {
     const { clientX, clientY } = event;
     setClickPosition({ x: clientX, y: clientY });
     createShape();
-    updateClickTimes();
+    updateClickTimes(Date.now());
   };
 
   
@@ -50,18 +51,25 @@ const ClickGame = () => {
     return shapes[randomIndex];
   };
 
-  const updateClickTimes = () => {
+  const updateClickTimes = (clickTime) => {
     setClickTimes((prevClickTimes) => {
-      if (prevClickTimes.length >= 10) {
-        return prevClickTimes;
+      const newClickTimes = [...prevClickTimes, clickTime];
+      const latestClickTimes = newClickTimes.slice(-10); // 최대 길이 유지
+  
+      const intervals = [];
+      for (let i = 1; i < latestClickTimes.length; i++) {
+        const interval = latestClickTimes[i] - latestClickTimes[i - 1];
+        intervals.push(interval);
       }
-      return [...prevClickTimes, Date.now()];
+  
+      setClickIntervals(intervals);
+      return latestClickTimes;
     });
   };
 
   useEffect(() => {
     if (clickTimes.length >= 10) {
-      console.log(clickTimes);
+      console.log(clickIntervals);
       setClickTimes([]);
       setShapes([]);
       setIsGameStarted(false);
@@ -76,10 +84,12 @@ const ClickGame = () => {
   };
 
   return (
-    <div style={{ height: '800px', background: '#001f04', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} onClick={handleClick}>
+    <div style={{ height: '1600px', background: '#001f04', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} onClick={handleClick}>
       {isButtonVisible && (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <button onClick={handleStartClick} style={{ marginTop: '350px', height: '100px', width: '100px', color: 'white' }}>
+          <button onClick={handleStartClick}
+           style={{ marginTop: '350px', height: '100px', width: '100px', color: '#001f04', fontSize: '20px'
+           ,border: '2px solid green', backgroundColor: '#65f765',borderRadius: '10px',boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
             Start
           </button>
           <p style={{ color: 'white', marginTop: '10px' }}>마우스 클릭</p>

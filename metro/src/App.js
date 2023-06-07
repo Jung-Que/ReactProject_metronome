@@ -2,21 +2,23 @@ import React from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import './App.css';
 import ClickGame from './ClickGame';
+import Homeabout from './home';
 import HorizonLine from './HorizonLine';
+import Tests from './testm';
 
 // Home 컴포넌트
 const Home = () => {
-  return <h1>Home 페이지</h1>;
+  return <Homeabout />;
 };
 
 // Test 컴포넌트
 const Test = () => {
-  return <h1>Test 페이지</h1>;
+  return <ClickGame />;
 };
 
 // Game 컴포넌트
 const Game = () => {
-  return <ClickGame />;
+  return<Tests />;
 };
 
 // About 컴포넌트
@@ -87,9 +89,9 @@ const App = () => {
         </div>
         <HorizonLine text=""/>
         <Routes>
-          <Route exact path="/" component={Home} />
-          <Route path="/test" component={Test} />
-          <Route path="/game" element={<Game />} /> {/* 수정된 부분 */}
+          <Route exact path="/" element={<Homeabout/>} />
+          <Route path="/test" element={<Test/>} />
+          <Route path="/game" element={<Tests />} />
           <Route path="/about" component={About} />
         </Routes>
       </div>
