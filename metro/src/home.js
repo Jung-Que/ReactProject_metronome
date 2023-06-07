@@ -4,24 +4,24 @@ const Homeabout = () => {
 
   const [isContentVisible, setIsContentVisible] = useState(true);
   const [scrollY, setScrollY] = useState(0);
-  const sections = [
+  const sections = [ //시간 나면 mongodb 연결
     {
-      image: 'logo.png',
+      image: 'test.PNG',
       title: 'Test',
       subtitle: '당신의 박자감을 테스트 해보세요!',
-      content: '다양한 박자 제공! 고득점을 노려보세요.',
+      content: '지금 듣고 있는 음악 bpm은 몇 일까요?',
     },
     {
-      image: 'logo.png',
+      image: 'game.PNG',
       title: 'Game',
       subtitle: '우리가 즐겨듣는 노래는 몇 BPM일까요?',
       content: '동영상의 노래를 듣고 몇 BPM인지 맞춰 보세요.',
     },
     {
-      image: 'logo.png',
+      image: 'about.PNG',
       title: 'About',
       subtitle: '개발자는 왜 이런 사이트를 만들었을까요?',
-      content: '박자를 알아야하는 이유? 이 프로젝트의 이유',
+      content: '박자를 알아야하는 이유? 프로젝트 개발 배경',
     },
     {
         image: '',

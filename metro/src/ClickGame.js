@@ -7,6 +7,8 @@ const ClickGame = () => {
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
   const [clickIntervals, setClickIntervals] = useState([]);
+  const [clickIntervalAvg, setClickIntervalAvg] = useState(null);
+  const [bpm, setBpm] = useState(null);
 
   const handleClick = (event) => {
     if (!isGameStarted) return;
@@ -17,8 +19,6 @@ const ClickGame = () => {
     updateClickTimes(Date.now());
   };
 
-  
-  
   const createShape = () => {
     const backgroundWidth = window.innerWidth;
     const backgroundHeight = 500; // 100~700
@@ -54,21 +54,32 @@ const ClickGame = () => {
   const updateClickTimes = (clickTime) => {
     setClickTimes((prevClickTimes) => {
       const newClickTimes = [...prevClickTimes, clickTime];
-      const latestClickTimes = newClickTimes.slice(-10); // 최대 길이 유지
-  
+      const latestClickTimes = newClickTimes.slice(-20); // 최대 길이 유지
+
       const intervals = [];
       for (let i = 1; i < latestClickTimes.length; i++) {
         const interval = latestClickTimes[i] - latestClickTimes[i - 1];
         intervals.push(interval);
       }
-  
+
       setClickIntervals(intervals);
+
+      if (intervals.length > 1) {
+        const avgInterval = intervals.reduce((sum, interval) => sum + interval, 0) / intervals.length;
+        setClickIntervalAvg(avgInterval.toFixed(2));
+        const bpmValue = 60000 / avgInterval;
+        setBpm(bpmValue.toFixed(2));
+      } else {
+        setClickIntervalAvg(null);
+        setBpm(null);
+      }
+
       return latestClickTimes;
     });
   };
 
   useEffect(() => {
-    if (clickTimes.length >= 10) {
+    if (clickTimes.length >= 20) {
       console.log(clickIntervals);
       setClickTimes([]);
       setShapes([]);
@@ -84,19 +95,41 @@ const ClickGame = () => {
   };
 
   return (
-    <div style={{ height: '1600px', background: '#001f04', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} onClick={handleClick}>
+    <div
+      style={{
+        height: '1600px',
+        background: '#001f04',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+      onClick={handleClick}
+    >
       {isButtonVisible && (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <button onClick={handleStartClick}
-           style={{ marginTop: '350px', height: '100px', width: '100px', color: '#001f04', fontSize: '20px'
-           ,border: '2px solid green', backgroundColor: '#65f765',borderRadius: '10px',boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
+          <button
+            onClick={handleStartClick}
+            style={{
+              marginTop: '350px',
+              height: '100px',
+              width: '100px',
+              color: '#001f04',
+              fontSize: '20px',
+              border: '2px solid green',
+              backgroundColor: '#65f765',
+              borderRadius: '10px',
+              boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+            }}
+          >
             Start
           </button>
-          <p style={{ color: 'white', marginTop: '10px' }}>마우스 클릭</p>
+          <p style={{ color: 'white', marginTop: '10px', fontSize:"25px" }}>음악을 틀고 박자에 맞춰 클릭해 보세요.</p>
+          {clickIntervalAvg !== null && <p style={{ color: 'white', marginTop: '10px',fontSize:"20px" }}>평균 클릭 간격: {clickIntervalAvg}ms (BPM: {bpm})</p>}
         </div>
       )}
       <div style={{ position: 'relative', height: '100%', width: '100%' }}>
-      {shapes.map((shape, index) => {
+        {shapes.map((shape, index) => {
           const { x, y, size, rotation, color, shape: shapeType, visible } = shape;
           const shapeStyle = {
             position: 'absolute',
@@ -109,7 +142,7 @@ const ClickGame = () => {
             transform: `rotate(${rotation}deg)`,
             transition: 'opacity 0.3s ease-out',
           };
-  
+
           if (shapeType === 'square') {
             return <div key={index} style={shapeStyle} />;
           } else if (shapeType === 'circle') {
@@ -129,7 +162,7 @@ const ClickGame = () => {
               />
             );
           }
-  
+
           return null;
         })}
       </div>

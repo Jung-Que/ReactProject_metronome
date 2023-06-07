@@ -5,6 +5,7 @@ import ClickGame from './ClickGame';
 import Homeabout from './home';
 import HorizonLine from './HorizonLine';
 import Tests from './testm';
+import Abouts from './about';
 
 // Home 컴포넌트
 const Home = () => {
@@ -23,7 +24,7 @@ const Game = () => {
 
 // About 컴포넌트
 const About = () => {
-  return <h1>About 페이지</h1>;
+  return <Abouts />;
 };
 
 const Menu = () => {
@@ -52,10 +53,10 @@ const Menu = () => {
           </li>
         </ul>
       </div>
-      <div style={{ paddingTop: "10px" ,paddingLeft: '0px', paddingRight: "50px"}}>
+    <div style={{ paddingTop: "10px" ,paddingLeft: '100px', paddingRight: "50px"}}>
+      <a href="https://github.com/Jung-Que/ReactProject_metronome" target="_blank">
         <img src="./gits.png" alt="이미지1" className="menu-image" style={{ width: '80px', height: '80px' }} />
-        <img src="./gits.png" alt="이미지2" className="menu-image" style={{ width: 'auto', height: '80px' }} />
-        <img src="./gits.png" alt="이미지3" className="menu-image" style={{ width: 'auto', height: '80px' }} />
+      </a>
       </div>
     </nav>
   );
@@ -63,18 +64,21 @@ const Menu = () => {
 
 const Menuunder = () => {
   return (
-    <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'left', marginBottom: '0px' }}>
+    <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0px' }}>
       <div>
         <li>
-            <Link to="/">
-              <img src="./logo.png" alt="로고" className="logo" 
-              style={{ width: 'auto', height: '70px' }} />
-            </Link>
-          </li>
+          <Link to="/">
+            <img src="./logo.png" alt="로고" className="logo" style={{ width: 'auto', height: '70px' }} />
+          </Link>
+        </li>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <p style={{ color:"white",paddingRight:"50px",fontSize:"24px"}}>made by 20195249 정현서</p>
       </div>
     </nav>
   );
 };
+
 
 
 // App 컴포넌트
@@ -92,7 +96,7 @@ const App = () => {
           <Route exact path="/" element={<Homeabout/>} />
           <Route path="/test" element={<Test/>} />
           <Route path="/game" element={<Tests />} />
-          <Route path="/about" component={About} />
+          <Route path="/about" element={<Abouts />} />
         </Routes>
       </div>
       <footer>
