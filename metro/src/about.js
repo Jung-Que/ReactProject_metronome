@@ -24,7 +24,7 @@ const Abouts = () => {
       image: 'test.PNG',
       title: 'Home, Test, Game, About을 제공합니다',
       subtitle: '리액트의 라우터 기능을 활용해 개발했습니다.',
-      content: '바 두개 사이에 각 컨텐츠 제공.',
+      content: '헤드바와 푸터바 사이 각 컨텐츠 제공.',
     },
    
     {
