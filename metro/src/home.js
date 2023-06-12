@@ -21,10 +21,10 @@ const Homeabout = () => {
       image: 'about.PNG',
       title: 'About',
       subtitle: '개발자는 왜 이런 사이트를 만들었을까요?',
-      content: '박자를 알아야하는 이유? 프로젝트 개발 배경',
+      content: '박자를 알아야하는 이유? 그리고 프로젝트 개발 배경',
     },
     {
-        image: '',
+      title: '', // 푸터바가 가리는 문제가 발생으로 가상 칸
       },
   ];
   const handleScroll = () => {

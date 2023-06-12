@@ -28,7 +28,7 @@ const Abouts = () => {
     },
    
     {
-        image: '',
+      title: '', // 푸터바가 가리는 문제가 발생으로 가상 칸
       },
   ];
   return (
@@ -38,7 +38,7 @@ const Abouts = () => {
         <div key={index}>
           <div style={{ display: 'flex', alignItems: 'normal' }}>
             <div>
-              <img src={section.image} alt={`이미지 ${index + 1}`} style={{ width: '400px', height: '400px' }} />
+              <img src={section.image} alt={`이미지 ${index + 1}`} style={{ width: '400px', height: '400px', backgroundColor: '#65f765' }} />
             </div>
             <div style={{ marginLeft: '150px' }}>
               <h2 style={{ marginBottom: '0px',fontSize :"50px" }}>{section.title}</h2>
